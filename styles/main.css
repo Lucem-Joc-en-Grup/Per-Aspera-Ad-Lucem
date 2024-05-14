@@ -1,15 +1,21 @@
 input[type=number] {
     height: 3rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: bold;
     width: 3rem;
     text-align: center;
 }
 
+@font-face {
+	font-family: 'MyFont';
+	src: url(../resources/fonts/long_pixel-7.ttf);
+}
+
 #title{
-	font-size: 50px;
-	line-height: 75px;
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+	font-size: 40px;
+	line-height: 50px;
+	font-family: 'MyFont';
+	color: rgb(255, 255, 255);
 }
 
 body {
@@ -31,13 +37,13 @@ body {
 
 p{
 	text-align: center;
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+	font-family: 'MyFont';
 }
 
 button.menu-object {
 	height: 65px;
 	border-radius: 5px;
-	background-color: rgb(255, 237, 137);
+	background-color: rgb(60, 134, 231);
 }
 
 button.menu-object:active{
@@ -76,7 +82,7 @@ svg:hover #light2 {
 }
 
 #title {
-    font-size: 26px;
+    font-size: 25px;
     line-height: 75px;
 }
 
@@ -88,6 +94,7 @@ svg:hover #light2 {
     height: 75px;
     font-size: 16px;
     margin-top: 10px;
+	font-family: 'MyFont';
 }
 
 p {
@@ -98,10 +105,12 @@ button.menu-object:active {
     font-size: 18px;
     width: 275px;
     height: 70px;
+	color: aliceblue;
 }
 
 button.menu-object:hover:not(:active) {
     font-size: 22px;
     width: 325px;
     height: 85px;
+	color: aliceblue;
 }
