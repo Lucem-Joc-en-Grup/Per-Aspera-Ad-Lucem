@@ -771,7 +771,6 @@
  </tileset>
  <objectgroup id="4" name="Bgs">
   <object id="2" gid="1" x="-5.05253" y="1057.79" width="3811" height="1056"/>
-  <object id="3" gid="21" x="838" y="1506" width="37" height="44"/>
  </objectgroup>
  <layer id="6" name="Tiles" width="94" height="24">
   <data encoding="csv">
