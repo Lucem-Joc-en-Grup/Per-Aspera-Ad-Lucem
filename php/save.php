@@ -6,4 +6,3 @@
 	$return->content = $_POST['name'].' : '.$_POST['score'];
 	echo json_encode($return);
 ?>
-
