@@ -12,8 +12,7 @@ function loadFont(name, url) {
     });
 }
 
-loadFont("gatNums", "../../resources/fonts/nums.ttf");
-loadFont("gatText", "../../resources/fonts/Meowcat.ttf");
+loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
 
 export default class End extends Phaser.Scene {
   constructor() {
@@ -35,22 +34,21 @@ export default class End extends Phaser.Scene {
     this.dialegPantalla = null;
   }
   preload() {
-    // Carnal.preload(this);
+    //Lucem.preload(this);
     //Backgrounds
     this.load.image(
-      "background1",
-      "../../resources/backgrounds/BackgroundB.png"
+      "backgroundB",
+      "../../resources/backgrounds/bg_b.png"
     );
-    this.load.image("carnal-fullArt", "../../resources/carnal_fullArt.png");
-    this.load.image("paloma-fullArt", "../../resources/paloma_fullArt.png");
-    // Dialegs
+
+    // Dialogs
     this.load.image(
-      "carnal-dialeg",
-      "../../resources/Dialeg/carnal_dialeg.png"
+      "doctor-dialeg",
+      "../../resources/dialog/DRdialog.png"
     );
     this.load.image(
-      "paloma-dialeg",
-      "../../resources/Dialeg/paloma_dialeg.png"
+      "team-dialeg",
+      "../../resources/dialog/teamdialog.png"
     );
   }
 
@@ -74,31 +72,17 @@ export default class End extends Phaser.Scene {
     let bg = this.add.image(this.centerX, this.centerY, "background1");
     bg.setScale(this.canvasWidth / bg.height);
 
-    // PJs
-    let paloma = this.add.image(
-      this.centerX + 250,
-      this.centerY + 100,
-      "paloma-fullArt"
-    );
-    paloma.setScale(0.3);
-    let carnal = this.add.image(
-      this.centerX - 200,
-      this.centerY + 100,
-      "carnal-fullArt"
-    );
-    carnal.setScale(0.3);
-
     
-//    |\__/,|   (`\
-//  _.|o o  |_   ) )
-//-(((---(((--------
+//
+//
+//
 
     this.canSkip = false;
     this.dialegs = [
-        ["Com t'ho havia promés, aquí tens.", "carnal"],
-        ["Miiaaau!!! Herba gateraaaa!!!!", "paloma"],
-        ["Sí, sí, però abans obrem la porta!", "carnal"],
-        ["Que si, aquí teens. Miaaau! La meva herbaa és tota meeva!", "paloma"]
+        ["Good to see you, Doctor Greenaway. Here is your equipment.", "doctor"],
+        ["I'm glad you made it safely, Doctor, and thank you, now we can set up camp and start recording our Aurora Borealis observation.", "team"],
+        ["Those bears were no match for my dedication to be here tonight. I'mready to hear the song of the skyes.", "doctor"],
+        ["Dramatic as always. Let's not waste time then. Through challenges to the light!", "team"]
     ]
     this.dialegActual = 0;
     this.dialegPantalla = new Dialogo(this, this.dialegs[this.dialegActual][0], this.dialegs[this.dialegActual][1]);
@@ -107,10 +91,6 @@ export default class End extends Phaser.Scene {
         this.canSkip = true;
     })
 
-    // this.time.delayedCall(3000, () => {
-    //   console.log("Destroy dialeg!");
-    //   d1.destroy();
-    // });
   }
   update() {
     if (this.inputKeys.attack.isDown && this.canSkip) {
@@ -152,7 +132,7 @@ export default class End extends Phaser.Scene {
   }
 }
 class Dialogo extends Phaser.GameObjects.Container {
-  constructor(scene, dialogText, character = "paloma") {
+  constructor(scene, dialogText, character = "team") {
     super(scene);
 
     this.scene = scene;
@@ -160,7 +140,7 @@ class Dialogo extends Phaser.GameObjects.Container {
     this.character = character;
 
     const dialogTextStyle = {
-      fontFamily: "gatText",
+      fontFamily: "MyFont",
       fontSize: "32px",
       color: "#ffed89",
       align: "left",
@@ -168,17 +148,17 @@ class Dialogo extends Phaser.GameObjects.Container {
     };
 
     let dialog;
-    if (character === "paloma") {
+    if (character === "team") {
       dialog = this.scene.add.image(
         this.scene.centerX,
         this.scene.centerY - 250,
-        "paloma-dialeg"
+        "team-dialeg"
       );
     } else {
       dialog = this.scene.add.image(
         this.scene.centerX,
         this.scene.centerY - 250,
-        "carnal-dialeg"
+        "doctor-dialeg"
       );
     }
 
