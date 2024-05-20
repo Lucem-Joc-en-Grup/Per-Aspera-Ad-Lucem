@@ -12,8 +12,7 @@ function loadFont(name, url) {
     });
 }
 
-loadFont("gatNums", "../../resources/fonts/nums.ttf");
-loadFont("gatText", "../../resources/fonts/Meowcat.ttf");
+loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
 
 export default class Begin extends Phaser.Scene {
   constructor() {
@@ -21,7 +20,7 @@ export default class Begin extends Phaser.Scene {
     this.platforms = null;
     this.player = null;
     this.cursors = null;
-    this.herb = null;
+    this.gear = null;
     this.score = 0;
     this.gameOver = false;
     this.canvasWidth = null;
@@ -35,22 +34,21 @@ export default class Begin extends Phaser.Scene {
     this.dialegPantalla = null;
   }
   preload() {
-    // Carnal.preload(this);
+    //Lucem.preload(this);
     //Backgrounds
     this.load.image(
       "backgroundB",
-      "../../resources/backgrounds/BackgroundB.png"
+      "../../resources/backgrounds/bg_b.png"
     );
-    this.load.image("carnal-fullArt", "../../resources/carnal_fullArt.png");
-    this.load.image("paloma-fullArt", "../../resources/paloma_fullArt.png");
-    // Dialegs
+
+    // Dialogs
     this.load.image(
-      "carnal-dialeg",
-      "../../resources/Dialeg/carnal_dialeg.png"
+      "doctor-dialeg",
+      "../../resources/dialog/DRdialog.png"
     );
     this.load.image(
-      "paloma-dialeg",
-      "../../resources/Dialeg/paloma_dialeg.png"
+      "team-dialeg",
+      "../../resources/dialog/teamdialog.png"
     );
   }
 
@@ -74,33 +72,20 @@ export default class Begin extends Phaser.Scene {
     let bg = this.add.image(this.centerX, this.centerY, "backgroundB");
     bg.setScale(this.canvasWidth / bg.height);
 
-    // PJs
-    let paloma = this.add.image(
-      this.centerX + 250,
-      this.centerY + 100,
-      "paloma-fullArt"
-    );
-    paloma.setScale(0.3);
-    let carnal = this.add.image(
-      this.centerX - 200,
-      this.centerY + 100,
-      "carnal-fullArt"
-    );
-    carnal.setScale(0.3);
-
-//    |\__/,|   (`\
-//  _.|o o  |_   ) )
-//-(((---(((--------
+//
+//
+//
 
     this.canSkip = false;
     this.dialegs = [
-        ["Ets la Paloma tu no? M'han dit que tu hem pots ajudar a escapar d'aquí.", "carnal"],
-        ["Escapar? De presó? Difícil. Però t'han informat bé. L'única cosa és... que té un preu.", "paloma"],
-        ["Un preu? Quin?", "carnal"],
-        ["Sí, veuràs... últimament una gran plaga de rates ha envaït la presó. Jo ja estic vella i no soc el que era.", "paloma"],
-        ["La questió es que la millor de les herbes gateres creix per aquestes àrees infestades. Si vols la llibertat ja et fas una idea del que vull. Ni hi pensis en tornar amb les mans buides.", "paloma"],
-        ["Està bé. Però assegura't que compleixes la teva part.", "carnal"],
-        ["Si compleixes la teva, jo compliré la meva. Sense excuses. Miaau.", "paloma"]
+        ["Doctor Greenaway? This is Doctor Bjornson form Rangá Observatory. Do you copy? Over.", "doctor"],
+        ["Affirmative. Although the signal is bad out here. Are you ready to join my team for the expedition? Over.", "team"],
+        ["Affirmative. Do you need any additional equipment from the Observatory? Over.", "doctor"],
+        ["Negative, Doctor. We had all the supplies we needed but on our way to the observation point our team had to flee local bears. A few of the assistants dropped their bags with gear, equipment and food.", "team"],
+        ["I remember that you are experienced in bear encounters so we hope that you could collect our lost gear on your way to us. Or the expedition will have to be cut short. Over.", "team"],
+        ["Copy that. I am too excited to hear the Aurora song so I will help you. How did your team move through the forest and what is your 20, Doctor Greenaway? Over.", "doctor"],
+        ["We are camping near the Vatnajökull Glacier. You will be able to follow our path by our campfires [Q]. We had to run all around, left [A] and right [D], jump on the bushes [W] and sneak under the rocks [S].", "team"],
+        ["Our physicist had to protect us from the bears with his pickaxe [E] but we were able to take a pause and rest time from time [ESC]. I hope you find us soon, Doctor, wouldn't want to miss this show. Out.", "team"]
     ];
     this.dialegActual = 0;
     this.dialegPantalla = new Dialogo(this, this.dialegs[this.dialegActual][0], this.dialegs[this.dialegActual][1]);
@@ -115,10 +100,6 @@ export default class Begin extends Phaser.Scene {
       this.scene.launch("Nivell1");
     }
 
-    // this.time.delayedCall(3000, () => {
-    //   console.log("Destroy dialeg!");
-    //   d1.destroy();
-    // });
   }
   update() {
     if (this.inputKeys.attack.isDown && this.canSkip) {
@@ -143,7 +124,7 @@ export default class Begin extends Phaser.Scene {
   }
 }
 class Dialogo extends Phaser.GameObjects.Container {
-  constructor(scene, dialogText, character = "paloma") {
+  constructor(scene, dialogText, character = "team") {
     super(scene);
 
     this.scene = scene;
@@ -151,7 +132,7 @@ class Dialogo extends Phaser.GameObjects.Container {
     this.character = character;
 
     const dialogTextStyle = {
-      fontFamily: "gatText",
+      fontFamily: "MyFont",
       fontSize: "32px",
       color: "#ffed89",
       align: "left",
@@ -159,17 +140,17 @@ class Dialogo extends Phaser.GameObjects.Container {
     };
 
     let dialog;
-    if (character === "paloma") {
+    if (character === "team") {
       dialog = this.scene.add.image(
         this.scene.centerX,
         this.scene.centerY - 250,
-        "paloma-dialeg"
+        "team-dialeg"
       );
     } else {
       dialog = this.scene.add.image(
         this.scene.centerX,
         this.scene.centerY - 250,
-        "carnal-dialeg"
+        "doctor-dialeg"
       );
     }
 
