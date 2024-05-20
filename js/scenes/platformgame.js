@@ -86,7 +86,7 @@ export default class Nivell1 extends Phaser.Scene {
 
         const tilesetTuberies = map.addTilesetImage("tuberia_tileset");
         const tilesetHerba = map.addTilesetImage("herba");
-        const tilesetVentilacio = map.addTilesetImage("entrada_ventilacio");
+        const tilesetVentilacio = map.addTilesetImage("firepit");
         const tilesetCollision = map.addTilesetImage("Collision");
         const tilesetBox = map.addTilesetImage("caixa")
 
