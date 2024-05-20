@@ -19,7 +19,7 @@ export default class Nivell1 extends Phaser.Scene {
         this.platforms = null;
         this.player = null;
         this.cursors = null;
-        this.herb = null;
+        this.gears = null;
         this.score = 0;
         this.gameOver = false;
         this.canvasWidth = null;
@@ -115,8 +115,8 @@ export default class Nivell1 extends Phaser.Scene {
 
         this.bears=[];
         for(var i=0;i<posicions.length;i++){
-          var rata = new Bear({ scene: this, x: posicions[i].x, y: posicions[i].y, texture: "bear_walk", frame: 0 });
-          this.rates.push(rata);
+          var bear = new Bear({ scene: this, x: posicions[i].x, y: posicions[i].y, texture: "bear_walk", frame: 0 });
+          this.bears.push(bear);
         }
 
         this.inputKeys = this.input.keyboard.addKeys({
@@ -137,7 +137,7 @@ export default class Nivell1 extends Phaser.Scene {
         // Colisions
         this.player.changeHitbox();
         this.physics.add.collider(this.player, layerTiles);
-        this.physics.add.collider(this.player, layerCollision);
+        this.physics.add.collider(this.player, layerCollisions);
         for(var i=0;i<this.bears.length;i++){
           this.bears[i].create();
           this.physics.add.collider(this.bears[i], layerTiles);
@@ -170,9 +170,9 @@ export default class Nivell1 extends Phaser.Scene {
         this.puntsUI = this.add.text(692, 10, "0", { fontSize: "50px", fontFamily: "MyFont" })
         this.puntsUI.setScrollFactor(0);
 
-        this.bear = this.add.sprite(45, 100, 'rata');
-        this.bear.setScale(0.65);
-        this.bear.setScrollFactor(0);
+        this.bearsUI = this.add.sprite(45, 100, 'rata');
+        this.bearsUI.setScale(0.65);
+        this.bearsUI.setScrollFactor(0);
         this.bearMatades = this.add.text(85, 70, "0", { fontSize: "50px", fontFamily: "MyFont" })
         this.bearMatades.setScrollFactor(0);
 
@@ -189,7 +189,7 @@ export default class Nivell1 extends Phaser.Scene {
         if (this.gameOver || this.pause) return;
         this.pause = false;
         this.player.update();
-        for(var i=0;i<this.bears.length;i++){this.rates[i].update();}
+        for(var i=0;i<this.bears.length;i++){this.bears[i].update();}
     }
     collectGear(player, gear) {
         if (gear.index > -1) { // Si és un tile correcte
