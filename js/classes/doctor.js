@@ -19,7 +19,7 @@ const JUMP_SPEED = 200;
 const SPRITE_X = 75;
 const SPRITE_Y = 90;
 
-export default class Carnal extends Phaser.GameObjects.Sprite {
+export default class Doctor extends Phaser.GameObjects.Sprite {
     constructor(data) {
         let { scene, x, y, texture, frame } = data;
         super(scene, x, y, texture, frame);

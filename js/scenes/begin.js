@@ -84,8 +84,8 @@ export default class Begin extends Phaser.Scene {
         ["Negative, Doctor. We had all the supplies we needed but on our way to the observation point our team had to flee local bears. A few of the assistants dropped their bags with gear, equipment and food.", "team"],
         ["I remember that you are experienced in bear encounters so we hope that you could collect our lost gear on your way to us. Or the expedition will have to be cut short. Over.", "team"],
         ["Copy that. I am too excited to hear the Aurora song so I will help you. How did your team move through the forest and what is your 20, Doctor Greenaway? Over.", "doctor"],
-        ["We are camping near the Vatnajökull Glacier. You will be able to follow our path by our campfires [Q]. We had to run all around, left [A] and right [D], jump on the bushes [W] and sneak under the rocks [S].", "team"],
-        ["Our physicist had to protect us from the bears with his pickaxe [E] but we were able to take a pause and rest time from time [ESC]. I hope you find us soon, Doctor, wouldn't want to miss this show. Out.", "team"]
+        ["We are camping near the Vatnajökull Glacier. You will be able to follow our path by our campfires <b>[Q]</b>. We had to run all around, left <b>[A]</b> and right <b>[D]</b>, jump on the bushes <b>[W]</b> and sneak under the rocks <b>[S]</b>.", "team"],
+        ["Our physicist had to protect us from the bears with his pickaxe <b>[E]</b> but we were able to take a pause and rest time from time <b>[ESC]</b>. I hope you find us soon, Doctor, wouldn't want to miss this show. Out.", "team"]
     ];
     this.dialegActual = 0;
     this.dialegPantalla = new Dialogo(this, this.dialegs[this.dialegActual][0], this.dialegs[this.dialegActual][1]);
