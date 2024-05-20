@@ -1,6 +1,6 @@
 "use strict";
-import Carnal from "../classes/carnal.js";
-import Rata from "../classes/rata.js";
+import Carnal from "../classes/doctor.js";
+import Rata from "../classes/bear.js";
 
 function loadFont(name, url) {
   var newFont = new FontFace(name, `url(${url})`);
@@ -11,8 +11,7 @@ function loadFont(name, url) {
   });
 }
 
-loadFont("gatNums","../../resources/fonts/nums.ttf");
-loadFont("gatText","../../resources/fonts/Meowcat.ttf");
+loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
 
 export default class Nivell1 extends Phaser.Scene {
     constructor() {
@@ -28,46 +27,40 @@ export default class Nivell1 extends Phaser.Scene {
         this.pause = false;
     }
     preload() {
-        // Carnal.preload(this);
+        // Lucem.preload(this);
         //Backgrounds
-        this.load.image("background1", "../../resources/backgrounds/background_passadisPorta.jpg");
-        this.load.image("background2", "../../resources/backgrounds/background_passadis.jpg");
-        this.load.image("background3", "../../resources/backgrounds/background_ventilacio.jpg");
-        this.load.image("background4", "../../resources/backgrounds/background_pati.jpg");
+        this.load.image("background1", "../../resources/backgrounds/bg_b.png");
+        this.load.image("background2", "../../resources/backgrounds/all_bgs.jpg");
 
         // Props
-        this.load.image("entrada_ventilacio", "../../resources/props/entrada_tileset.png");
-        this.load.image("tuberia_tileset", "../../resources/props/tuberia_tileset.png");
-        this.load.image("herba", "../../resources/props/herba_tileset.png");
-        this.load.image("caixa", "../../resources/props/box_tileset.png");
+        this.load.image("firepit", "../../resources/props/firepit.png");
+        this.load.image("obstacles", "../../resources/props/obstacles.png");
+        this.load.image("gear", "../../resources/props/gear_tile.png");
+        this.load.image("collision", "../../resources/props/Collision.png");
 
-        // Icones
-        this.load.image("cor", "../resources/icones/cor.png");
-        this.load.image("rata", "../resources/icones/rata.png");
-        this.load.image("herbaUI", "../resources/icones/herba.png");
+        // Icons
+        this.load.image("heart", "../resources/icons/heart.png");
+        this.load.image("bear", "../resources/icons/bear.png");
+        this.load.image("gearUI", "../resources/icons/gear.png");
 
 
-        this.load.image("Collision", "../../resources/assets/Collision.png");
         this.load.tilemapTiledJSON("TileMap001", "../../tiled/TileMap001.json");
         this.load.tilemapTiledJSON("TileMap002", "../../tiled/TileMap002.json");
         this.load.tilemapTiledJSON("TileMap003", "../../tiled/TileMap003.json");
 
         // Player
-        this.load.spritesheet("carnal_walk", "../../resources/carnal_sprites/carnal_walk.png", { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_attack", '../../resources/carnal_sprites/carnal_attack.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_sneak", '../../resources/carnal_sprites/carnal_sneak.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_sneak_attack", '../../resources/carnal_sprites/carnal_sneak_attack.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_jump", '../../resources/carnal_sprites/carnal_jump.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_idle", '../../resources/carnal_sprites/carnal_wait.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_damage", '../../resources/carnal_sprites/carnal_damage.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.spritesheet("carnal_death", '../../resources/carnal_sprites/carnal_death.png', { frameWidth: 500, frameHeight: 500 });
-        this.load.image("carnal-texture", "../../resources/prueba.png");
+        this.load.spritesheet("doctor_walk", "../../resources/doc_sprites/carnal_walk.png", { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_attack", '../../resources/doc_sprites/carnal_attack.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_sneak", '../../resources/doc_sprites/carnal_sneak.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_sneak_attack", '../../resources/doc_sprites/carnal_sneak_attack.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_jump", '../../resources/doc_sprites/carnal_jump.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_idle", '../../resources/doc_sprites/carnal_wait.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_damage", '../../resources/doc_sprites/carnal_damage.png', { frameWidth: 500, frameHeight: 500 });
+        this.load.spritesheet("doctor_death", '../../resources/doc_sprites/carnal_death.png', { frameWidth: 500, frameHeight: 500 });
 
-        // Personatge
-        this.load.spritesheet("paloma_idle", '../../resources/paloma_sprites/paloma_idle.png', { frameWidth: 500, frameHeight: 500 });
 
-        // Enemics
-        this.load.spritesheet("rat_walk", '../../resources/rats_sprites/rat_walk.png', { frameWidth: 343, frameHeight: 142 });
+        // Enemies
+        this.load.spritesheet("bear_walk", '../../resources/bears_sprites/bears.png', { frameWidth: 240, frameHeight: 144 });
 
     }
 
@@ -150,7 +143,6 @@ export default class Nivell1 extends Phaser.Scene {
 
         this.player.create();
 
-        // Suposo que una cosa com s'herba no hauria de tenir colisions, sinó que en tocar-la o en entrar dins sa seva àrea l'hauria d'adquirir. De moment té colisions perquè uwu
 
         // Colisions
         this.player.changeHitbox();
