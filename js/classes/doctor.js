@@ -16,13 +16,14 @@ const states = {
 
 const SPEED = 250;
 const JUMP_SPEED = 200;
-const SPRITE_SIZE = 500;
+const SPRITE_X = 75;
+const SPRITE_Y = 90;
 
 export default class Carnal extends Phaser.GameObjects.Sprite {
     constructor(data) {
         let { scene, x, y, texture, frame } = data;
         super(scene, x, y, texture, frame);
-        // Variables del personatge
+        // Character variables
         this.hitPoints = this.scene.game.config.vides;
         this.rates=this.scene.game.config.ratesMatades;
         this.actualState = states.idle;
@@ -33,40 +34,40 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
         this.moving = false;
         this.canMove = true;
         this.hitbox = {
-            sizeX: 250,
-            sizeY: 300,
-            offsetX: 125,
-            offsetY: 150
+            sizeX: 75,
+            sizeY: 84,
+            offsetX: 0,
+            offsetY: 6
         }
         this.canTakeDamage = true;
         this.invencible = false;
     }
     create() {
-        console.log("Create Carnal");
+        console.log("Create Doctor");
         this.scene.physics.world.enable(this);
-        this.body.setBounce(0.1); // Configurar el rebot del jugador
+        this.body.setBounce(0.1); // Player's bounce
         if(!this.scene.anims.exists("walk")){
       this.scene.anims.create({
         key: "walk",
-        frames: this.scene.anims.generateFrameNumbers("carnal_walk", {
-          start: 0,
-          end: 4,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 6,
+          end: 11,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "attack",
-        frames: this.scene.anims.generateFrameNumbers("carnal_attack", {
-          start: 0,
-          end: 3,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 18,
+          end: 22,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "sneak",
-        frames: this.scene.anims.generateFrameNumbers("carnal_sneak", {
+        frames: this.scene.anims.generateFrameNumbers("doc_down", {
           start: 0,
           end: 0,
         }),
@@ -75,51 +76,51 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
       });
       this.scene.anims.create({
         key: "sneak_walk",
-        frames: this.scene.anims.generateFrameNumbers("carnal_sneak", {
+        frames: this.scene.anims.generateFrameNumbers("doc_down", {
           start: 0,
-          end: 2,
+          end: 4,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "sneak_attack",
-        frames: this.scene.anims.generateFrameNumbers("carnal_sneak_attack", {
-          start: 0,
-          end: 2,
+        frames: this.scene.anims.generateFrameNumbers("doc_down", {
+          start: 6,
+          end: 9,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "jump",
-        frames: this.scene.anims.generateFrameNumbers("carnal_jump", {
-          start: 0,
-          end: 3,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 12,
+          end: 14,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "fall",
-        frames: this.scene.anims.generateFrameNumbers("carnal_jump", {
-          start: 4,
-          end: 4,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 14,
+          end: 14,
         }),
         frameRate: 6,
       });
       this.scene.anims.create({
         key: "land",
-        frames: this.scene.anims.generateFrameNumbers("carnal_jump", {
-          start: 5,
-          end: 7,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 13,
+          end: 13,
         }),
         frameRate: 6,
         repeat: 0,
       });
       this.scene.anims.create({
         key: "idle",
-        frames: this.scene.anims.generateFrameNumbers("carnal_walk", {
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
           start: 0,
           end: 0,
         }),
@@ -127,17 +128,17 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
       });
       this.scene.anims.create({
         key: "damage",
-        frames: this.scene.anims.generateFrameNumbers("carnal_damage", {
-          start: 0,
-          end: 0,
+        frames: this.scene.anims.generateFrameNumbers("doc_up", {
+          start: 1,
+          end: 1,
         }),
         frameRate: 1,
       });
       this.scene.anims.create({
         key: "death",
-        frames: this.scene.anims.generateFrameNumbers("carnal_death", {
-          start: 0,
-          end: 0,
+        frames: this.scene.anims.generateFrameNumbers("doc_down", {
+          start: 11,
+          end: 11,
         }),
         frameRate: 0,
       });
@@ -147,7 +148,7 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
     });
   }
   update() {
-    // if (this.scene.inputKeys.ferir_carnal.isDown) this.setState(states.damage);
+    //
     // MOVE _____________________________________________________________________________
     if (this.scene.inputKeys.left.isDown && this.canMove) {
       this.setFlipX(true);
@@ -161,7 +162,7 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(0);
       this.moving = false;
     }
-    if (this.scene.inputKeys.posicio_carnal.isDown) console.log("x: ",this.body.x,", y: ",this.body.y);
+    if (this.scene.inputKeys.posicio_doc.isDown) console.log("x: ",this.body.x,", y: ",this.body.y);
     // STATE MACHINE ____________________________________________________________________
     switch (this.actualState) {
       case states.idle: // ----------------------------------- IDLE
@@ -283,7 +284,7 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
           callback: () =>{
               this.hitPoints--;
               this.scene.game.config.vides--;
-              console.log("Carnal damaged. " + this.hitPoints + " hit points left");
+              console.log("Doctor Bjornson damaged. " + this.hitPoints + " hit points left");
               this.scene.canviarVidesUI(this.hitPoints);
 
               if (this.hitPoints <= 0) {
@@ -316,7 +317,7 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
         cam.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
           cam.fadeIn(500);
           var rect = this.scene.add.rectangle(this.scene.canvasWidth/2, this.scene.canvasHeight/2, this.scene.canvasWidth, this.scene.canvasHeight, 0x000000);
-          var text = this.scene.add.text(this.scene.canvasWidth/2-180, this.scene.canvasHeight/2-75, "GAME OVER", { fontSize: "100px", fontFamily: "gatText" })
+          var text = this.scene.add.text(this.scene.canvasWidth/2-180, this.scene.canvasHeight/2-75, "GAME OVER", { fontSize: "100px", fontFamily: "MyFont" })
           text.setScrollFactor(0);
           rect.setScrollFactor(0);
           this.scene.gameOver = true;
@@ -326,16 +327,16 @@ export default class Carnal extends Phaser.GameObjects.Sprite {
     }
   }
   changeHitbox() {
-    if (this.actualState == states.sneak || this.actualState == states.sneakAttack || this.actualState == states.sneakWalk) {
-      this.hitbox.sizeX = 250;
-      this.hitbox.sizeY = 120;
+    if (this.actualState == states.sneak || this.actualState == states.sneakAttack || this.actualState == states.sneakWalk || this.actualState == states.death) {
+      this.hitbox.sizeX = 75;
+      this.hitbox.sizeY = 63;
     } else {
-      this.hitbox.sizeX = 250;
-      this.hitbox.sizeY = 300;
+      this.hitbox.sizeX = 75;
+      this.hitbox.sizeY = 84;
     }
     
-    this.hitbox.offsetX = (SPRITE_SIZE - this.hitbox.sizeX) - 50;
-    this.hitbox.offsetY = (SPRITE_SIZE - this.hitbox.sizeY ) - 50;
+    this.hitbox.offsetX = (SPRITE_X - this.hitbox.sizeX) - 10;
+    this.hitbox.offsetY = (SPRITE_Y - this.hitbox.sizeY ) - 10;
     
     this.body.setSize(this.hitbox.sizeX, this.hitbox.sizeY);
     this.body.setOffset(this.hitbox.offsetX, this.hitbox.offsetY);
