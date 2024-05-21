@@ -8,8 +8,8 @@ import End from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/
 
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 728,
+    width: 1080,
+    height: 1080,
 	backgroundColor: '#bec4ed',
 	type: Phaser.AUTO,
     parent: 'game_area',
@@ -34,7 +34,5 @@ if(localStorage.getItem("carregar")==1){
 		game.config.lives = data.lives;
 		game.config.bearMatades = data.bears;
 		game.config.escena = data.escena;
-
-	
 
 }
