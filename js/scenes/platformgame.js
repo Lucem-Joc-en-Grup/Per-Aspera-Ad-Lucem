@@ -69,7 +69,7 @@ export default class Nivell1 extends Phaser.Scene {
         let map_height = this.canvasHeight;
 
         // Scene Backgorund
-        let bg = this.add.image(map_width / 2, map_height / 2, "background1");
+        let bg = this.add.image(map_width / 2, map_height / 2, "background2");
         bg.setScale(this.canvasWidth / bg.height);
         //bg.setScrollFactor(0);
         // create the Tilemap
@@ -170,7 +170,7 @@ export default class Nivell1 extends Phaser.Scene {
         this.puntsUI = this.add.text(692, 10, "0", { fontSize: "50px", fontFamily: "MyFont" })
         this.puntsUI.setScrollFactor(0);
 
-        this.bearsUI = this.add.sprite(45, 100, 'rata');
+        this.bearsUI = this.add.sprite(45, 100, 'bearUI');
         this.bearsUI.setScale(0.65);
         this.bearsUI.setScrollFactor(0);
         this.bearMatades = this.add.text(85, 70, "0", { fontSize: "50px", fontFamily: "MyFont" })
@@ -199,7 +199,7 @@ export default class Nivell1 extends Phaser.Scene {
         }
     }
     canviarBearsUI(bears){
-      this.bearMatadesMatades.setText(this.bears);
+      this.bearMatades.setText(this.bears);
     }
     canviarLivesUI(lives){
       this.hearts[lives].setActive(false).setVisible(false);
