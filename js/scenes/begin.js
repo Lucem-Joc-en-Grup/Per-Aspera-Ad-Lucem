@@ -20,7 +20,7 @@ export default class Begin extends Phaser.Scene {
     this.platforms = null;
     this.player = null;
     this.cursors = null;
-    this.gear = null;
+    this.gears = null;
     this.score = 0;
     this.gameOver = false;
     this.canvasWidth = null;
@@ -134,7 +134,7 @@ class Dialogo extends Phaser.GameObjects.Container {
     const dialogTextStyle = {
       fontFamily: "MyFont",
       fontSize: "32px",
-      color: "#ffed89",
+      color: "#000000",
       align: "left",
       wordWrap: { width: 400, useAdvancedWrap: true },
     };

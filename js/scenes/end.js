@@ -20,7 +20,7 @@ export default class End extends Phaser.Scene {
     this.platforms = null;
     this.player = null;
     this.cursors = null;
-    this.herb = null;
+    this.gears = null;
     this.score = 0;
     this.gameOver = false;
     this.canvasWidth = null;
