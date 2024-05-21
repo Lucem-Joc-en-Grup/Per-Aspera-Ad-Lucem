@@ -71,7 +71,7 @@ export default class Nivell2 extends Phaser.Scene {
         this.canvasWidth = width;
         this.canvasHeight = height;
 
-        let map_width = 4000 * this.canvasHeight/1045;// 2165 + this.canvasWidth;
+        let map_width = 1894 + this.canvasWidth;
         let map_height = this.canvasHeight;
 
         // Scene Backgorund
@@ -103,8 +103,8 @@ export default class Nivell2 extends Phaser.Scene {
 
         this.player = new Doctor ({
             scene: this, // Passa l'objecte a l'escena actual
-            x: 100,
-            y: 200,
+            x: 500,
+            y: 880,
             texture: "doc_up",
         })
         this.videsStart = this.player.hitPoints;

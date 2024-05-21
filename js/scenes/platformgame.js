@@ -97,8 +97,8 @@ export default class Nivell1 extends Phaser.Scene {
 
         this.player = new Doctor ({
             scene: this, // Passa l'objecte a l'escena actual
-            x: 160,
-            y: 610,
+            x: 370,
+            y: 880,
             texture: "doc_up",
         })
 

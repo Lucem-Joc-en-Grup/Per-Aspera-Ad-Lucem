@@ -1,6 +1,6 @@
 "use strict";
-import Carnal from "../classes/carnal.js";
-import Rata from "../classes/rata.js";
+import Doctor from "../classes/doctor.js";
+import Bear from "../classes/bear.js";
 
 function loadFont(name, url) {
   var newFont = new FontFace(name, `url(${url})`);
@@ -11,16 +11,15 @@ function loadFont(name, url) {
   });
 }
 
-loadFont("gatNums","../../resources/fonts/nums.ttf");
-loadFont("gatText","../../resources/fonts/Meowcat.ttf");
+loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
 
-export default class Nivell3 extends Phaser.Scene {
+export default class Nivell2 extends Phaser.Scene {
     constructor() {
         super("Nivell3");
         this.platforms = null;
         this.player = null;
         this.cursors = null;
-        this.herb = null;
+        this.gears = null;
         this.score = 9;
         this.scoreText;
         this.bombs = null;
@@ -30,50 +29,41 @@ export default class Nivell3 extends Phaser.Scene {
     }
     preload() {
         if(!this.game.textures.get("background1")){
-            // Carnal.preload(this);
+            // Lucem.preload(this);
             //Backgrounds
-            this.load.image("background1", "../../resources/backgrounds/background_passadisPorta.jpg");
-            this.load.image("background2", "../../resources/backgrounds/background_passadis.jpg");
-            this.load.image("background3", "../../resources/backgrounds/background_ventilacio.jpg");
-            this.load.image("background4", "../../resources/backgrounds/background_pati.jpg");
-
+            this.load.image("background1", "../../resources/backgrounds/bg_b.png");
+            this.load.image("background2", "../../resources/backgrounds/all_bgs.jpg");
+    
             // Props
-            this.load.image("entrada_ventilacio", "../../resources/props/entrada_tileset.png");
-            this.load.image("tuberia_tileset", "../../resources/props/tuberia_tileset.png");
-            this.load.image("herba", "../../resources/props/herba_tileset.png");
-            this.load.image("caixa", "../../resources/props/box_tileset.png");
-
-            // Icones
-            this.load.image("cor", "../resources/icones/cor.png");
-            this.load.image("rata", "../resources/icones/rata.png");
-            this.load.image("herbaUI", "../resources/icones/herba.png");
-
-
-            this.load.image("Collision", "../../resources/assets/Collision.png");
+            this.load.image("firepit", "../../resources/props/firepit.png");
+            this.load.image("obstacles", "../../resources/props/obstacles.png");
+            this.load.image("gear", "../../resources/props/gear_tile.png");
+            this.load.image("collision", "../../resources/props/Collision.png");
+    
+            // Icons
+            this.load.image("heart", "../resources/icons/heart.png");
+            this.load.image("bear", "../resources/icons/bear.png");
+            this.load.image("gearUI", "../resources/icons/gear.png");
+    
+    
             this.load.tilemapTiledJSON("TileMap001", "../../tiled/TileMap001.json");
             this.load.tilemapTiledJSON("TileMap002", "../../tiled/TileMap002.json");
             this.load.tilemapTiledJSON("TileMap003", "../../tiled/TileMap003.json");
-
+    
             // Player
-            this.load.spritesheet("carnal_walk", "../../resources/carnal_sprites/carnal_walk.png", { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_attack", '../../resources/carnal_sprites/carnal_attack.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_sneak", '../../resources/carnal_sprites/carnal_sneak.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_sneak_attack", '../../resources/carnal_sprites/carnal_sneak_attack.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_jump", '../../resources/carnal_sprites/carnal_jump.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_idle", '../../resources/carnal_sprites/carnal_wait.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_damage", '../../resources/carnal_sprites/carnal_damage.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.spritesheet("carnal_death", '../../resources/carnal_sprites/carnal_death.png', { frameWidth: 500, frameHeight: 500 });
-            this.load.image("carnal-texture", "../../resources/prueba.png");
-
+            this.load.spritesheet("doc_up", "../../resources/doc_sprites/doc_up.png", { frameWidth: 75, frameHeight: 90 });
+            this.load.spritesheet("doc_down", '../../resources/doc_sprites/doc_down.png', { frameWidth: 75, frameHeight: 90 });
+    
             // Personatge
             this.load.spritesheet("paloma_idle", '../../resources/paloma_sprites/paloma_idle.png', { frameWidth: 500, frameHeight: 500 });
-
+    
             // Enemics
-            this.load.spritesheet("rat_walk", '../../resources/rats_sprites/rat_walk.png', { frameWidth: 343, frameHeight: 142 });
+            this.load.spritesheet("bear_walk", '../../resources/bears_sprites/bears.png', { frameWidth: 240, frameHeight: 144 });
         }
     }
 
     create() {
+        console.log("Nivell 3");
         // Get canvas size
         this.game.config.current = this;
         this.game.config.started = true;
@@ -85,7 +75,7 @@ export default class Nivell3 extends Phaser.Scene {
         let map_height = this.canvasHeight;
 
         // Scene Backgorund
-        let bg = this.add.image(map_width / 2, map_height / 2, "background4");
+        let bg = this.add.image(map_width / 2, map_height / 2, "background2");
         bg.setScale(this.canvasWidth / bg.height);
         //bg.setScrollFactor(0);
         // create the Tilemap
@@ -93,52 +83,48 @@ export default class Nivell3 extends Phaser.Scene {
             key: "TileMap003",
         });
 
-        const tilesetTuberies = map.addTilesetImage("tuberia_tileset");
-        const tilesetHerba = map.addTilesetImage("herba");
-        const tilesetVentilacio = map.addTilesetImage("entrada_ventilacio");
-        const tilesetCollision = map.addTilesetImage("Collision");
-        const tilesetBox = map.addTilesetImage("caixa")
+        const tilesetObstacles = map.addTilesetImage("obstacles");
+        const tilesetGear = map.addTilesetImage("gear");
+        const tilesetFirepit = map.addTilesetImage("firepit");
+        const tilesetCollisions = map.addTilesetImage("collision");
 
-        const layerTiles = map.createLayer("Tiles", [tilesetTuberies, tilesetBox]);
-        const layerHerba = map.createLayer("Tiles_herba", [tilesetHerba]);
-        const layerNext = map.createLayer("Next", [tilesetVentilacio]);
-        const layerCollision = map.createLayer("Collisions", []);
-        const layerCollisionRata = map.createLayer("Collisions_rata", []);
+        const layerTiles = map.createLayer("Tiles", [tilesetObstacles]);
+        const layerTiles_gear = map.createLayer("Tiles_gear", [tilesetGear]);
+        const layerNext = map.createLayer("Next", [tilesetFirepit]);
+        const layerCollisions = map.createLayer("Collisions", []);
+        const layerCollisions_bear = map.createLayer("Collisions_rata", []);
 
-
-        // He copiat es setScale(0.2) per a tots però no se si ha de ser així
 
         layerTiles.setScale(0.2);
-        layerHerba.setScale(0.2);
-        layerCollision.setScale(0.2);
-        layerCollisionRata.setScale(0.2);
+        layerTiles_gear.setScale(0.2);
+        layerCollisions.setScale(0.2);
+        layerCollisions_bear.setScale(0.2);
         layerNext.setScale(0.2);
 
-        //En Facu havia llevat aquest tros i no es veia es moix per això, no se perquè ha ha llevat però així funciona
-        this.player = new Carnal({
+        this.player = new Doctor ({
             scene: this, // Passa l'objecte a l'escena actual
-            x: 100,
-            y: 610,
-            texture: "carnal_idle",
+            x: 200,
+            y: 880,
+            texture: "doc_up",
         })
         this.videsStart = this.player.hitPoints;
         this.ratesStart = this.player.rates;
 
-        // Posicions de les rates: per cada posició es crea una rata nova
+        // Positions of the bears: for every position we create new bear
         var posicions = [
-          {x:800,y:580},
-          {x:1079,y:362},
-          {x:1520,y:580},
-          {x:1474,y:143},
-          {x:618,y:70},
-          {x:2100,y:580},
-          
+          {x:625,y:700},
+          {x:1234,y:245},
+          {x:1400,y:575},
+          {x:1677,y:60},
+          {x:2550,y:700},
+          {x:2685,y:365},
+          {x:2735,y:30}        
         ];
 
-        this.rates=[];
+        this.bears=[];
         for(var i=0;i<posicions.length;i++){
-          var rata = new Rata({ scene: this, x: posicions[i].x, y: posicions[i].y, texture: "rat_walk", frame: 0 });
-          this.rates.push(rata);
+          var bear = new Bear({ scene: this, x: posicions[i].x, y: posicions[i].y, texture: "bear_walk", frame: 0 });
+          this.bears.push(bear);
         }
 
         this.inputKeys = this.input.keyboard.addKeys({
@@ -148,55 +134,54 @@ export default class Nivell3 extends Phaser.Scene {
             interact: Phaser.Input.Keyboard.KeyCodes.Q,
             jump: Phaser.Input.Keyboard.KeyCodes.W,
             sneak: Phaser.Input.Keyboard.KeyCodes.S,
-            posicio_carnal: Phaser.Input.Keyboard.KeyCodes.Z,
+            posicio_doc: Phaser.Input.Keyboard.KeyCodes.Z,
             pause: Phaser.Input.Keyboard.KeyCodes.ESC
         });
 
         this.player.create();
 
-        // Suposo que una cosa com s'herba no hauria de tenir colisions, sinó que en tocar-la o en entrar dins sa seva àrea l'hauria d'adquirir. De moment té colisions perquè uwu
-
+      
         // Colisions
         this.player.changeHitbox();
         this.physics.add.collider(this.player, layerTiles);
-        this.physics.add.collider(this.player, layerCollision);
-        for(var i=0;i<this.rates.length;i++){
-          this.rates[i].create();
-          this.physics.add.collider(this.rates[i], layerTiles);
-          this.physics.add.collider(this.rates[i], layerCollision);
-          this.physics.add.overlap(this.rates[i], layerCollisionRata, (a, b) => { if (b.index > -1) a.flip(); });
-          this.physics.add.overlap(this.rates[i], this.player, (a,b) => {if(a.active) b.rebreMal();});
+        this.physics.add.collider(this.player, layerCollisions);
+        for(var i=0;i<this.bears.length;i++){
+          this.bears[i].create();
+          this.physics.add.collider(this.bears[i], layerTiles);
+          this.physics.add.collider(this.bears[i], layerCollisions);
+          this.physics.add.overlap(this.bears[i], layerCollisions_bear, (a, b) => { if (b.index > -1) a.flip(); });
+          this.physics.add.overlap(this.bears[i], this.player, (a,b) => {if(a.active) b.rebreMal();});
         }
-        this.physics.add.overlap(this.player, layerHerba, (a, b) => this.collectHerba(a, b));
+        this.physics.add.overlap(this.player, layerTiles_gear, (a, b) => this.collectGear(a, b));
         this.physics.add.overlap(this.player, layerNext, (a,b) => {if(b.index > -1) this.canviarNivell()});
 
         layerTiles.setCollisionBetween(5, 23);
-        layerCollision.setCollisionBetween(11, 11);
-        layerCollisionRata.setCollisionBetween(11, 11);
+        layerCollisions.setCollisionBetween(11, 11);
+        layerCollisions_bear.setCollisionBetween(11, 11);
 
         this.cameras.main.setBounds(0, 0, map_width, map_height); // Ajusta els límits de la càmera segons el tamany de l'escena
-        this.cameras.main.startFollow(this.player, true, 0.5, 0.5); // Estableix a Carnal com a l'objecte a seguir amb la càmara
+        this.cameras.main.startFollow(this.player, true, 0.5, 0.5); // Estableix a Doctor com a l'objecte a seguir amb la càmara
 
-        this.videsStart = this.player.hitPoints;
-        this.ratesStart = this.player.rates;
-        this.cors = [];
+        this.livesStart = this.player.hitPoints;
+        this.bearsStart = this.player.rates;
+        this.hearts = [];
         for (var i = 0; i < this.player.hitPoints; i++) {
-            this.cors[i] = this.add.sprite(45 + 35 * i, 40, 'cor');
-            this.cors[i].setScale(0.60);
-            this.cors[i].setScrollFactor(0);
+            this.hearts[i] = this.add.sprite(45 + 35 * i, 40, 'heart');
+            this.hearts[i].setScale(0.60);
+            this.hearts[i].setScrollFactor(0);
         }
 
-        this.herba = this.add.sprite(755, 40, 'herbaUI');
-        this.herba.setScale(0.75);
-        this.herba.setScrollFactor(0);
-        this.puntsUI = this.add.text(692, 10, "9", { fontSize: "50px", fontFamily: "gatNums" })
+        this.gear = this.add.sprite(755, 40, 'gearUI');
+        this.gear.setScale(0.75);
+        this.gear.setScrollFactor(0);
+        this.puntsUI = this.add.text(692, 10, "9", { fontSize: "50px", fontFamily: "MyFont" })
         this.puntsUI.setScrollFactor(0);
 
-        this.ratesUI = this.add.sprite(45, 100, 'rata');
-        this.ratesUI.setScale(0.65);
-        this.ratesUI.setScrollFactor(0);
-        this.ratesMatades = this.add.text(85, 70, this.game.config.ratesMatades, { fontSize: "50px", fontFamily: "gatNums" })
-        this.ratesMatades.setScrollFactor(0);
+        this.bearsUI = this.add.sprite(45, 100, 'bearUI');
+        this.bearsUI.setScale(0.65);
+        this.bearsUI.setScrollFactor(0);
+        this.bearMatades = this.add.text(85, 70, this.game.config.bearMatades, { fontSize: "50px", fontFamily: "MyFont" })
+        this.bearMatades.setScrollFactor(0);
 
         this.map = map;
         this.input.keyboard.on('keydown-ESC', this.pauseJoc, this);
@@ -205,20 +190,20 @@ export default class Nivell3 extends Phaser.Scene {
         if (this.gameOver || this.pause) return;
         this.pause = false;
         this.player.update();
-        for(var i=0;i<this.rates.length;i++){this.rates[i].update();}
+        for(var i=0;i<this.bears.length;i++){this.bears[i].update();}
     }
-    collectHerba(player, herba) {
-        if (herba.index > -1) { // Si és un tile correcte
+    collectGear(player, gear) {
+        if (gear.index > -1) { // Si és un tile correcte
             this.score++;
             this.map.removeTile(herba);
             this.puntsUI.setText(this.score);
         }
     }
-    canviarRatesUI(rates){
-      this.ratesMatades.setText(rates);
+    canviarBearsUI(bears){
+      this.bearMatades.setText(bears);
     }
-    canviarVidesUI(vides){
-      this.cors[vides].setActive(false).setVisible(false);
+    canviarLivesUI(lives){
+      this.hearts[lives].setActive(false).setVisible(false);
     }
     pauseJoc(){
       this.pause = false;
@@ -226,7 +211,7 @@ export default class Nivell3 extends Phaser.Scene {
       this.scene.pause();
     }
     canviarNivell(){
-      if(this.inputKeys.interact.isDown && this.score==15)
+      if(this.inputKeys.interact.isDown && this.score==9)
       {
         this.scene.stop();
         this.scene.launch("End");
