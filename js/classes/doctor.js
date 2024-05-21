@@ -321,7 +321,7 @@ export default class Doctor extends Phaser.GameObjects.Sprite {
           text.setScrollFactor(0);
           rect.setScrollFactor(0);
           this.scene.gameOver = true;
-          setTimeout(() => {loadpage("../../index.html")}, 4000);
+          setTimeout(() => {loadpage("https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/index.html")}, 4000);
         })
         break;
     }
