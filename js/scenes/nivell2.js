@@ -160,13 +160,13 @@ export default class Nivell2 extends Phaser.Scene {
         layerCollisions_bear.setCollisionBetween(11, 11);
 
         this.cameras.main.setBounds(0, 0, map_width, map_height); // Ajusta els límits de la càmera segons el tamany de l'escena
-        this.cameras.main.startFollow(this.player, true, 0.5, 0.5); // Estableix a Carnal com a l'objecte a seguir amb la càmara
+        this.cameras.main.startFollow(this.player, true, 0.5, 0.5); // Estableix a Doctor com a l'objecte a seguir amb la càmara
 
         this.livesStart = this.player.hitPoints;
         this.bearsStart = this.player.rates;
         this.hearts = [];
         for (var i = 0; i < this.player.hitPoints; i++) {
-            this.hearts[i] = this.add.sprite(45 + 35 * i, 40, 'cor');
+            this.hearts[i] = this.add.sprite(45 + 35 * i, 40, 'heart');
             this.hearts[i].setScale(0.60);
             this.hearts[i].setScrollFactor(0);
         }
