@@ -1,9 +1,9 @@
-import Nivell1 from "./scenes/platformgame.js";
-import Nivell3 from "./scenes/nivell3.js";
-import Nivell2 from "./scenes/nivell2.js";
-import Pause from "./scenes/pauseScene.js";
-import Begin from "./scenes/begin.js";
-import End from "./scenes/end.js";
+import Nivell1 from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/platformgame.js";
+import Nivell3 from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/nivell3.js";
+import Nivell2 from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/nivell2.js";
+import Pause from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/pauseScene.js";
+import Begin from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/begin.js";
+import End from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/end.js";
 
 
 var config = {
@@ -24,15 +24,15 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-game.config.vides = 9;
-game.config.ratesMatades = 0;
+game.config.lives = 10;
+game.config.bearMatades = 0;
 game.config.started = false;
 if(localStorage.getItem("carregar")==1){
 	console.log("Load game");
 	var data = JSON.parse(localStorage.getItem("partida"));
 	
-		game.config.vides = data.vides;
-		game.config.ratesMatades = data.rates;
+		game.config.lives = data.lives;
+		game.config.bearMatades = data.bears;
 		game.config.escena = data.escena;
 
 	
