@@ -141,10 +141,10 @@ class Dialogo extends Phaser.GameObjects.Container {
 
     const dialogTextStyle = {
       fontFamily: "MyFont",
-      fontSize: "32px",
-      color: "#ffed89",
+      fontSize: "28px",
+      color: "#FFFFFF",
       align: "left",
-      wordWrap: { width: 400, useAdvancedWrap: true },
+      wordWrap: { width: 800, useAdvancedWrap: true },
     };
 
     let dialog;
