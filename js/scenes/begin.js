@@ -12,7 +12,7 @@ function loadFont(name, url) {
     });
 }
 
-loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
+loadFont("MyFont", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/fonts/long_pixel-7.ttf");
 
 export default class Begin extends Phaser.Scene {
   constructor() {
@@ -38,17 +38,17 @@ export default class Begin extends Phaser.Scene {
     //Backgrounds
     this.load.image(
       "backgroundB",
-      "../../resources/backgrounds/bg_b.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/backgrounds/bg_b.png"
     );
 
     // Dialogs
     this.load.image(
       "doctor-dialeg",
-      "../../resources/dialog/DRdialog.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/dialog/DRdialog.png"
     );
     this.load.image(
       "team-dialeg",
-      "../../resources/dialog/teamdialog.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/dialog/teamdialog.png"
     );
   }
 
