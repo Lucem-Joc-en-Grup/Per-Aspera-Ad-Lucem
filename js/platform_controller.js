@@ -24,15 +24,15 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-game.config.vides = 9;
-game.config.ratesMatades = 0;
+game.config.lives = 10;
+game.config.bearMatades = 0;
 game.config.started = false;
 if(localStorage.getItem("carregar")==1){
 	console.log("Load game");
 	var data = JSON.parse(localStorage.getItem("partida"));
 	
-		game.config.vides = data.vides;
-		game.config.ratesMatades = data.rates;
+		game.config.lives = data.lives;
+		game.config.bearMatades = data.bears;
 		game.config.escena = data.escena;
 
 	
