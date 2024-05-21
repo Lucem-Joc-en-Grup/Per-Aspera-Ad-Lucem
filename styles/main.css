@@ -8,7 +8,7 @@ input[type=number] {
 
 @font-face {
 	font-family: 'MyFont';
-	src: url(../resources/fonts/long_pixel-7.ttf);
+	src: url(https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/fonts/long_pixel-7.ttf);
 }
 
 #title{
@@ -19,7 +19,7 @@ input[type=number] {
 }
 
 body {
-	background-image: url(../resources/backgrounds/blue_lights.jpg);
+	background-image: url(https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/backgrounds/blue_lights.jpg);
 	background-size: 100%;
 } 
 
