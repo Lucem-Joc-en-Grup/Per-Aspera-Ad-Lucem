@@ -136,27 +136,27 @@ class Dialogo extends Phaser.GameObjects.Container {
       fontSize: "32px",
       color: "#000000",
       align: "left",
-      wordWrap: { width: 400, useAdvancedWrap: true },
+      wordWrap: { width: 1000, useAdvancedWrap: true },
     };
 
     let dialog;
     if (character === "team") {
       dialog = this.scene.add.image(
         this.scene.centerX,
-        this.scene.centerY - 250,
+        this.scene.centerY,
         "team-dialeg"
       );
     } else {
       dialog = this.scene.add.image(
         this.scene.centerX,
-        this.scene.centerY - 250,
+        this.scene.centerY,
         "doctor-dialeg"
       );
     }
 
     let text = this.scene.add.text(
-      this.scene.centerX - 135,
-      this.scene.centerY - 320,
+      this.scene.centerX,
+      this.scene.centerY + 350,
       "",
       dialogTextStyle
     );
