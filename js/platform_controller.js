@@ -8,9 +8,9 @@ import End from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/scenes/
 
 var config = {
     type: Phaser.AUTO,
-    width: 1080,
-    height: 1080,
-	backgroundColor: '#bec4ed',
+    width: 1000,
+    height: 1000,
+	backgroundColor: '#87ff42',
 	type: Phaser.AUTO,
     parent: 'game_area',
 	physics: {
