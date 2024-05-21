@@ -12,7 +12,7 @@ function loadFont(name, url) {
     });
 }
 
-loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
+loadFont("MyFont", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/fonts/long_pixel-7.ttf");
 
 export default class End extends Phaser.Scene {
   constructor() {
@@ -38,17 +38,17 @@ export default class End extends Phaser.Scene {
     //Backgrounds
     this.load.image(
       "backgroundB",
-      "../../resources/backgrounds/bg_b.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/backgrounds/bg_b.png"
     );
 
     // Dialogs
     this.load.image(
       "doctor-dialeg",
-      "../../resources/dialog/DRdialog.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/dialog/DRdialog.png"
     );
     this.load.image(
       "team-dialeg",
-      "../../resources/dialog/teamdialog.png"
+      "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/dialog/teamdialog.png"
     );
   }
 
@@ -124,7 +124,7 @@ export default class End extends Phaser.Scene {
               this.text.setScrollFactor(0);
               rect.setScrollFactor(0);
               this.gameOver = true;
-              setTimeout(() => {loadpage("../../index.html")}, 4000);
+              setTimeout(() => {loadpage("https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/index.html")}, 4000);
             })
             });
         }
@@ -151,20 +151,20 @@ class Dialogo extends Phaser.GameObjects.Container {
     if (character === "team") {
       dialog = this.scene.add.image(
         this.scene.centerX,
-        this.scene.centerY - 250,
+        this.scene.centerY,
         "team-dialeg"
       );
     } else {
       dialog = this.scene.add.image(
         this.scene.centerX,
-        this.scene.centerY - 250,
+        this.scene.centerY,
         "doctor-dialeg"
       );
     }
 
     let text = this.scene.add.text(
-      this.scene.centerX - 135,
-      this.scene.centerY - 320,
+      this.scene.centerX,
+      this.scene.centerY + 350,
       "",
       dialogTextStyle
     );

@@ -1,6 +1,6 @@
 "use strict";
-import Doctor from "../classes/doctor.js";
-import Bear from "../classes/bear.js";
+import Doctor from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/classes/doctor.js";
+import Bear from "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/classes/bear.js";
 
 function loadFont(name, url) {
   var newFont = new FontFace(name, `url(${url})`);
@@ -11,7 +11,7 @@ function loadFont(name, url) {
   });
 }
 
-loadFont("MyFont", "../../resources/fonts/long_pixel-7.ttf");
+loadFont("MyFont", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/fonts/long_pixel-7.ttf");
 
 export default class Nivell1 extends Phaser.Scene {
     constructor() {
@@ -29,31 +29,31 @@ export default class Nivell1 extends Phaser.Scene {
     preload() {
         // Lucem.preload(this);
         //Backgrounds
-        this.load.image("background1", "../../resources/backgrounds/bg_b.png");
-        this.load.image("background2", "../../resources/backgrounds/all_bgs.jpg");
+        this.load.image("background1", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/backgrounds/bg_b.png");
+        this.load.image("background2", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/backgrounds/all_bgs.jpg");
 
         // Props
-        this.load.image("firepit", "../../resources/props/firepit.png");
-        this.load.image("obstacles", "../../resources/props/obstacles.png");
-        this.load.image("gear", "../../resources/props/gear_tile.png");
-        this.load.image("collision", "../../resources/props/Collision.png");
+        this.load.image("firepit", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/props/firepit.png");
+        this.load.image("obstacles", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/props/obstacles.png");
+        this.load.image("gear", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/props/gear_tile.png");
+        this.load.image("collision", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/props/Collision.png");
 
         // Icons
-        this.load.image("heart", "../resources/icons/heart.png");
-        this.load.image("bear", "../resources/icons/bear.png");
-        this.load.image("gearUI", "../resources/icons/gear.png");
+        this.load.image("heart", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/icons/heart.png");
+        this.load.image("bear", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/icons/bear.png");
+        this.load.image("gearUI", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/icons/gear.png");
 
 
-        this.load.tilemapTiledJSON("TileMap001", "../../tiled/TileMap001.json");
-        this.load.tilemapTiledJSON("TileMap002", "../../tiled/TileMap002.json");
-        this.load.tilemapTiledJSON("TileMap003", "../../tiled/TileMap003.json");
+        this.load.tilemapTiledJSON("TileMap001", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/tiled/TileMap001.json");
+        this.load.tilemapTiledJSON("TileMap002", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/tiled/TileMap002.json");
+        this.load.tilemapTiledJSON("TileMap003", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/tiled/TileMap003.json");
 
         // Player
-        this.load.spritesheet("doc_up", "../../resources/doc_sprites/doc_up.png", { frameWidth: 75, frameHeight: 90 });
-        this.load.spritesheet("doc_down", '../../resources/doc_sprites/doc_down.png', { frameWidth: 75, frameHeight: 90 });
+        this.load.spritesheet("doc_up", "https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/doc_sprites/doc_up.png", { frameWidth: 75, frameHeight: 90 });
+        this.load.spritesheet("doc_down", 'https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/doc_sprites/doc_down.png', { frameWidth: 75, frameHeight: 90 });
 
         // Enemies
-        this.load.spritesheet("bear_walk", '../../resources/bears_sprites/bears.png', { frameWidth: 240, frameHeight: 144 });
+        this.load.spritesheet("bear_walk", 'https://lucem-joc-en-grup.github.io/Per-Aspera-Ad-Lucem/resources/bears_sprites/bears.png', { frameWidth: 240, frameHeight: 144 });
 
     }
 
